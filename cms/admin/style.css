@@ -1,0 +1,54 @@
+
+
+table {
+    border-collapse: collapse;
+    width:100%;
+  }
+  
+table, td, th {
+    border: 1px dotted gray;
+    font: gray;
+    font-family: Verdana;
+  }
+th, td{
+    padding: 10px;
+    text-align:left;
+}
+
+
+
+.img_preview{
+    max-width: 75px;
+    max-height: 75px;
+}
+
+img{
+    border: 1px solid gray;
+}
+
+.detailButton{
+    padding:0;
+    border: none;
+    background: none;
+    font-size:18px;
+    width: 100%;
+    white-space: normal;
+
+}
+.detailButton:hover{
+    color:#0000EE;
+    text-decoration: underline;
+}
+.buyButton{
+    width:50%;
+}
+
+.customNav{
+    margin-left:5px;
+    margin-right:5px;
+}
+.updateBtn{
+    margin-top:5px;
+}
+
+
