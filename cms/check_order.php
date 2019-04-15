@@ -68,21 +68,21 @@ $email = "";
 
 
 if(isset($_POST['first_name']) && $_POST['first_name'] != ''){
-    $firstName = $_POST['first_name'];
+    $firstName = mysqli_real_escape_string($conn,$_POST['first_name']);
 }else{
     $fNameError = 1;
     $error = 1;
 }
 
 if(isset($_POST['last_name']) && $_POST['last_name'] != ''){
-    $lastName = $_POST['last_name'];
+    $lastName = mysqli_real_escape_string($conn,$_POST['last_name']);
 }else{
     $lNameError = 1;
     $error = 1;
 }
 
 if(isset($_POST['phone']) && $_POST['phone'] != ''){
-    $phone = $_POST['phone'];
+    $phone = mysqli_real_escape_string($conn,$_POST['phone']);
 }else{
     $phoneError = 1;
     $error = 1;
