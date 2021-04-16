@@ -56,10 +56,16 @@ if(isset($_POST['confirmPassword']) && $_POST['confirmPassword'] != ""){
     $confirmPasswordError = 1;
 }
 
-$sql = "SELECT * FROM admin_info WHERE password = '".$oldPassword."' AND admin_id = $admin_id ";
+//get the logged in user
+$sql = "SELECT * FROM admin_info WHERE admin_id = $admin_id ";
+
 $result = mysqli_query($conn, $sql);
-if(mysqli_num_rows($result) == 0 ){
-    $wrongPasswordError = 1;
+while($row = mysqli_fetch_assoc($result)){
+    //use password_verify to determine if the entered password matches the hashed password
+    if(password_verify($oldPassword, $row['password']) == false){
+        echo "wrong password";
+        $wrongPasswordError = 1;
+    }
 }
 
 if($oldPasswordError != 0 || $newPasswordError != 0 || $confirmPasswordError != 0 || $wrongPasswordError != 0){
@@ -87,9 +93,9 @@ if($oldPasswordError != 0 || $newPasswordError != 0 || $confirmPasswordError != 
 }else{
     
     //echo "<br/>id: $admin_id";
-    //echo "<br/>password: $newPassword";
-    
-    $sql = "UPDATE admin_info SET password='".$newPassword."' WHERE admin_id = '".$admin_id."'";
+    //hash the password using the default algorithm (bcrypt as of April 2021)
+    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+    $sql = "UPDATE admin_info SET password='".$hashedPassword."' WHERE admin_id = '".$admin_id."'";
     if(mysqli_query($conn, $sql)){
         //echo "success";
         header("Location:index.php");
